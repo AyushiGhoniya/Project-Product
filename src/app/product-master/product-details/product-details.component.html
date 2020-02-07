@@ -1,0 +1,81 @@
+<div class="container" style="margin: 5em 5em;">
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="navigateToAddProduct()" >Add Product</button>
+        </div>
+        <div class="col-md-8">
+            <div class="input-group">
+                <!-- <span class="input-group-addon"><i class="fa fa-search"></i></span> -->
+                <input class="form-control" [(ngModel)]="searchText" (input)="getFilteredProducts()" name="search" placeholder="Search Product">
+            </div>
+        </div>
+        <div class="col-md-1" id="favourite">
+            <div class="button-group">
+                <!-- <button><span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span></button> -->
+                <a class="btn btn-large btn-danger" routerLink="/products/favourite">
+                    <i class="fa fa-heart"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-1" id="cart">
+            <div class="button-group">
+                <!-- <button><span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span></button> -->
+                <a class="btn btn-large btn-dark" routerLink="/products/cart">
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table" style="width: 100%; margin-top: 1em;">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Stock Update</th>
+            <th>Total Price</th>
+            <th>Remove</th>
+            <th>Edit</th>
+            <th>Add to cart</th>
+            <th>Favourite</th>
+        </tr>
+        
+        <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
+            <td>{{ product.title }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <app-stock-status [stock]='product.stock' [product]="product" [fromComp]="'productDetails'"></app-stock-status> 
+            </td>
+            <td>{{ product.price * product.stock }}</td>
+            <td><button (click)="removeProduct(product.id)" class="btn btn-danger">Remove</button></td>
+            <td><button (click)="editProduct(product.id)" class="btn btn-info">Edit</button></td>
+            <td><button (click)="addToCart(product.id)" class="btn btn-primary">Add to cart</button></td>
+            <td><button class="fav" (click)="addToFavourite(product.id)">
+                <ng-container *ngIf="!product.isFavourite">
+                    <img class="img-responsive" src="assets/Unfavourite.png" alt="image">
+                </ng-container>
+                <ng-container *ngIf="product.isFavourite">
+                    <img class="img-responsive" src="../../../assets/Favourite.png" alt="image">
+                </ng-container>
+            </button></td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <th>Total</th>
+            <th>{{ getTotalPrice() }}</th>
+            <th>{{ getTotalStock() }}</th>
+            <th></th>
+            <th>{{ getGrandTotal() }}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
+    <br>
+    <app-sort-product [products]="products"></app-sort-product>
+</div>

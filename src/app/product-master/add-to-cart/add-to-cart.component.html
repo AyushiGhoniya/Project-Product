@@ -1,0 +1,72 @@
+<ng-container *ngIf='productList.length != 0'>
+    <div class="container" *ngIf="fromComp=='cart'">
+        <h1 style="text-align: center;">Cart</h1>
+        <table class="table" style="width: 100%; margin-top: 1em;">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Quntity</th>
+                <th>Total Price</th>
+                <th>Remove</th>
+            </tr>
+            
+            <tr *ngFor="let cart of productList">
+                <td>{{ cart.id }}</td>
+                <td>{{ cart.title }}</td>
+                <td>{{ cart.price }}</td>
+                <td>{{ cart.stock }}</td>
+                <td>
+                    <app-stock-status [product]="cart" [fromComp]="'cart'"></app-stock-status> 
+                </td>
+                <td>{{ cart.price * cart.quantity }}</td>
+                <td><button (click)="removeProduct(cart.id)" class="btn btn-danger">Remove</button></td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <th>Total</th>
+                <th>{{ getTotalPrice() }}</th>
+                <th></th>
+                <th>Total items : {{ getTotalQuantity() }}</th>
+                <th>{{ getGrandTotal() }}</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container" *ngIf="fromComp=='favourite'">
+        <h1 style="text-align: center;">Wish List</h1>
+        <table class="table" style="width: 100%; margin-top: 1em;">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Remove</th>
+                <th>Favourite</th>
+            </tr>
+            
+            <tr *ngFor="let cart of productList">    <!-- | filter:searchText  -->
+                <td>{{ cart.id }}</td>
+                <td>{{ cart.title }}</td>
+                <td>{{ cart.price }}</td>
+                <td><button (click)="removeProduct(cart.id)" class="btn btn-danger">Remove</button></td>
+                <td><button class="fav" (click)="ngOnChanges(cart.id)">
+                    <img class="img-responsive" src="../../../assets/Favourite.png" alt="image">
+                </button></td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <th>Total</th>
+                <th>{{ getTotalPrice() }}</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+</ng-container>
+
+<ng-container *ngIf='productList.length == 0'>
+    <p style="text-align: center; margin-top: 20%; font-size: 60px;">Your cart is empty...!!!</p>
+</ng-container>

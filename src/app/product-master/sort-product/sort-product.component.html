@@ -1,0 +1,19 @@
+<div>
+
+    <button (click)="sortId('id')">Id : Low to High</button>&nbsp;&nbsp;
+    <span class="sortorder" ng-show="propertyName === 'id'"></span>
+    <button (click)="sortId()">Id : High to Low</button>&nbsp;&nbsp;
+
+    <button (click)="sortProduct('name')">Product : A to Z</button>&nbsp;&nbsp;
+    <span class="sortorder" ng-show="propertyName === 'name'"></span>
+    <button (click)="sortProduct()">Product : Z to A</button>&nbsp;&nbsp;
+
+    <button (click)="sortPrice('price')">Price : Low to High</button>&nbsp;&nbsp;
+    <span class="sortorder" ng-show="propertyName === 'price'"></span>
+    <button (click)="sortPrice()">Price : High to Low</button>&nbsp;&nbsp;
+
+    <button (click)="sortStock('stock')">Stock : Low to High</button>&nbsp;&nbsp;
+    <span class="sortorder" ng-show="propertyName === 'stock'"></span>
+    <button (click)="sortStock()">Stock : High to Low</button>&nbsp;&nbsp;
+
+</div>

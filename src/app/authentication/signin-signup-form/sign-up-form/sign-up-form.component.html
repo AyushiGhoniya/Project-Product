@@ -1,0 +1,52 @@
+<div class="container" style="margin-top: 10em; margin-left: 10em;">
+    <h1>Sign up Form</h1>
+    <div class="container">
+    <form class="form-group" #signUpForm="ngForm" (ngSubmit)="getSignUpDetails(signUpForm)">
+
+
+        <label for="Email">Email : </label><br>
+        <div class="input-group">
+            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
+            <input type="email" email class="form-control" name="txtEmail" placeholder="Enter email" [(ngModel)]='email' #txtEmail='ngModel' required>
+        </div>
+        
+        <div *ngIf="txtEmail.touched && txtEmail.errors?.required" class="alert alert-danger">
+            email is required
+        </div>
+        <div [hidden]="txtEmail.valid || txtEmail.pristine" class="alert alert-danger">
+            Enter proper email
+        </div>
+
+
+        <label for="password">Password : </label><br>
+        <div class="input-group">
+            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> -->
+            <input type="password" class="form-control" placeholder="Enter password" name="txtPassword" [(ngModel)]="password" #txtPassword='ngModel' minlength="6" maxlength="10" required><br>
+        </div>
+        <div *ngIf="txtPassword.touched && txtPassword.errors?.required" class="alert alert-danger">
+            password is required
+        </div>
+        <div [hidden]="txtPassword.valid || txtPassword.pristine" class="alert alert-danger">
+            Password length should be between 6 to 10 characters
+        </div>
+
+
+        <label for="confirmPassword">Confirm Password : </label><br>
+        <div class="input-group">
+            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> -->
+            <input type="password" class="form-control" placeholder="Enter confirm password" name="txtConfPassword" [(ngModel)]="confirmPassword" #txtConfPassword='ngModel' required [ngModelOptions]="{standalone: true}">
+        </div>
+        <div [hidden]="txtConfPassword.valid || txtConfPassword.pristine" class="alert alert-danger">
+            Confirm password required
+        </div>
+        <ng-container *ngIf="txtConfPassword.valid">
+            <div [hidden]="txtPassword.value == txtConfPassword.value" class="alert alert-danger">
+                Password is mismatch
+            </div>
+        </ng-container>
+        <br>
+        <button type="submit" class="btn btn-success" [disabled]="!signUpForm.valid || txtPassword.value != txtConfPassword.value">Submit</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" (click)="navigateToHome()">Cancel</button>
+    </form>
+</div>
+</div>

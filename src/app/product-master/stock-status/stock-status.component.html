@@ -1,0 +1,22 @@
+<ng-container *ngIf="fromComp=='productDetails'">
+    <input type="number" [appInput]="product.stock" style="margin-bottom: 7px; padding-left: 6px;" (input)="onKeyPress(product.stock)" [(ngModel)]="product.stock" #txtStockStatus='ngModel' required>
+    <br>
+    <div [hidden]="txtStockStatus.valid" class="alert alert-danger">
+        Field is required
+    </div>
+    <label [hidden]="product.price * product.stock==0" [ngStyle]="{'background-color': labelColor, 'color': 'white'}">
+        {{ status }}    
+    </label>&nbsp;&nbsp;
+    <label [appGrade]="product.stock" [hidden]="product.price * product.stock==0"></label>
+</ng-container>
+
+<ng-container *ngIf="fromComp=='cart'">
+    <input type="number" style="margin-bottom: 7px;" [(ngModel)]='product.quantity' #txtQuantity='ngModel' required>
+    <br>
+    <div [hidden]="txtQuantity.valid" class="alert alert-danger">
+        Field is required
+    </div>
+    <div [hidden]="!(product.quantity > product.stock)" class="alert alert-danger">
+        Value must be less than {{ product.stock }}
+    </div>
+</ng-container>

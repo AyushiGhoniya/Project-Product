@@ -1,0 +1,13 @@
+<div class="container">
+    <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
+        Title : <input type="text" placeholder="Title" formControlName="title" required>
+        <br><br>
+        Price : <input type="number" placeholder="Price" formControlName="price" required>
+        <br><br>
+        Stock : <input type="number" placeholder="Stock" formControlName="stock" required>
+        <br><br>
+        <button type="submit" class="btn btn-success" [disabled]="!addProductForm.valid">Submit</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" (click)="navigateToProductDetails()">Cancel</button>
+        <br><br>
+    </form>
+</div>

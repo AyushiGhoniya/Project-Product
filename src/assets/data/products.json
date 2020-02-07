@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "title": "Oreo",
+      "price": 15,
+      "stock": 10,
+      "quantity": 1,
+      "isFavourite": false,
+      "id": 1
+    },
+    {
+      "title": "Tiger",
+      "price": 5,
+      "stock": 20,
+      "quantity": 1,
+      "isFavourite": false,
+      "id": 2
+    },
+    {
+      "title": "Bournbon",
+      "price": 20,
+      "stock": 30,
+      "quantity": 1,
+      "isFavourite": false,
+      "id": 3
+    },
+    {
+      "title": "Treat",
+      "price": 10,
+      "stock": 5,
+      "quantity": 1,
+      "isFavourite": false,
+      "id": 4
+    }
+  ]
+}
